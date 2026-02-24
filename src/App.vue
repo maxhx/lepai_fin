@@ -7,6 +7,23 @@
         <span>Upload Order Data</span>
       </template>
       
+      <el-input
+        v-model="jsonInput"
+        type="textarea"
+        :rows="8"
+        placeholder="Paste JSON content here"
+        style="margin-bottom: 20px;"
+      />
+
+      <el-button
+        class="el-upload__text"
+        @click="processJsonInput"
+        style="margin-bottom: 30px; color: #409EFF; border-color: #409EFF; background-color: #ecf5ff;"
+      >
+        <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+        <div>Process JSON</div>
+      </el-button>
+
       <el-upload
         class="upload-demo"
         drag
@@ -128,6 +145,7 @@ export default {
   setup() {
     const orderData = ref([])
     const orderStats = ref(null)
+    const jsonInput = ref('')
     
     const handleFileUpload = async (file) => {
       try {
@@ -151,6 +169,31 @@ export default {
       } catch (error) {
         console.error('Error processing file:', error)
         alert('Error processing file: ' + error.message)
+      }
+    }
+    
+    const processJsonInput = () => {
+      try {
+        if (!jsonInput.value.trim()) {
+          alert('Please enter valid JSON content')
+          return
+        }
+
+        const jsonData = JSON.parse(jsonInput.value)
+        let orders = []
+        
+        if (jsonData.rows) {
+          orders = jsonData.rows
+        } else {
+          orders = Array.isArray(jsonData) ? jsonData : [jsonData]
+        }
+
+        const result = processOrderData(orders)
+        orderData.value = result.orders
+        orderStats.value = result.stats
+      } catch (error) {
+        console.error('Error processing JSON input:', error)
+        alert('Invalid JSON format: ' + error.message)
       }
     }
     
@@ -181,7 +224,9 @@ export default {
       orderData,
       orderStats,
       handleFileUpload,
-      exportToExcel
+      processJsonInput,
+      exportToExcel,
+      jsonInput
     }
   }
 }
