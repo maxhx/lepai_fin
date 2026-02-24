@@ -1,0 +1,37 @@
+{
+  "rows": [
+    {
+      "orderId": "ORD001",
+      "totalBaseAmount": 150.50,
+      "status": "completed",
+      "createTime": "2023-01-15T10:30:00Z",
+      "updateTime": "2023-01-15T11:45:00Z",
+      "currency": "CNY",
+      "paymentMethod": "credit_card",
+      "buyerId": "BUYER001",
+      "sellerId": "SELLER001"
+    },
+    {
+      "orderId": "ORD002",
+      "totalBaseAmount": 89.99,
+      "status": "pending",
+      "createTime": "2023-01-16T09:15:00Z",
+      "updateTime": "2023-01-16T09:15:00Z",
+      "currency": "CNY",
+      "paymentMethod": "alipay",
+      "buyerId": "BUYER002",
+      "sellerId": "SELLER002"
+    },
+    {
+      "orderId": "ORD003",
+      "totalBaseAmount": 245.75,
+      "status": "completed",
+      "createTime": "2023-01-17T14:20:00Z",
+      "updateTime": "2023-01-17T16:30:00Z",
+      "currency": "CNY",
+      "paymentMethod": "wechat_pay",
+      "buyerId": "BUYER003",
+      "sellerId": "SELLER003"
+    }
+  ]
+}
